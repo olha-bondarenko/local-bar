@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Coctails } from 'src/app/models/coctails.model';
+import { Coctail } from 'src/app/models/coctails.model';
 import { LocalBarService } from 'src/app/service/local-bar.service';
 
 @Component({
@@ -8,9 +8,10 @@ import { LocalBarService } from 'src/app/service/local-bar.service';
   styleUrls: ['./coctails-list.component.less']
 })
 export class CoctailsListComponent implements OnInit {
-drinks: Coctails[] = []
+drinks: Coctail[] = []
 value = '';
 message = '';
+
   constructor(private service: LocalBarService) { }
 
   ngOnInit(): void {
@@ -18,21 +19,24 @@ message = '';
   }
 
   getDefaultList() {
-    this.getDrinks('a');
+    this.getDrinksByCoctail('a');
   }
   search(e: string) {
-    if (e === '') this.getDefaultList();
-    this.getDrinks(e);
+    this.getDrinksByCoctail(this.value);
   }
 
-  getDrinks(value?: string){
-    this.service.getCoctailsList(value)
+  getDrinksByCoctail(value: string){
+    this.service.getDrinks(value)
     .subscribe(data => {
-      if (data) {
-        this.drinks = data?.drinks;
+      if (data?.drinks) {
+        this.drinks = data.drinks;
         this.message = '';
       }
       else this.message = 'There are no coctails with this name. Try to search again.';
     })
+  }
+
+  addCoctail(coctail: Coctail) {
+    this.service.addCoctail(coctail)
   }
 }
