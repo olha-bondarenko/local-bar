@@ -17,11 +17,16 @@ export class LocalBarService {
   }
 
   addCoctail(coctail: Coctail) {
-    let url = 'http://localhost:3000/server';
+    let url = 'http://localhost:3000/data';
       const headers = new HttpHeaders({
         'Content-Type': 'application/json'
       });
       return this.http.post<any[]>(url, coctail, {headers});
+  }
+
+  getCartCoctails() {
+    let url = 'http://localhost:3000/data';
+    return this.http.get<any>(url)
   }
   
   handleError(error: HttpErrorResponse) {

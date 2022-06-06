@@ -1,1 +1,15 @@
-<p>checkout-page works!</p>
+<div *ngIf="drinks?.length; else noDrinks" class="main-container">
+    <ng-container *ngFor="let drink of drinks">
+        <mat-card class="example-card">
+            <mat-card-title-group>
+            <mat-card-title>{{drink.strDrink}}</mat-card-title>
+            <mat-card-subtitle>{{drink.strCategory}}</mat-card-subtitle>
+            <img mat-card-md-image src="{{drink.strDrinkThumb}}" alt="Photo of a coctail">
+            </mat-card-title-group>
+            <mat-card-content>
+                <p>{{drink.strAlcoholic}}</p>
+            </mat-card-content>
+        </mat-card>
+    </ng-container>
+</div>
+<ng-template #noDrinks>There are no drinks in the cart</ng-template>

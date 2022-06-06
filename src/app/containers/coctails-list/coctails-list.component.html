@@ -7,8 +7,10 @@
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
+        <button mat-mini-fab color="primary" class="basket-icon" (click)="navigate()">
+          <mat-icon>shopping_basket</mat-icon>
+        </button>
   </div>
-
 <mat-grid-list cols="2" rowHeight="1:1">
   <div class="no-coctails-message">
     <span *ngIf="value.length">{{message}}</span>
@@ -20,7 +22,7 @@
           <mat-card-title>{{drink.strDrink}}</mat-card-title>
           <mat-card-subtitle>{{drink.strCategory}}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image src="{{drink.strDrinkThumb}}" alt="Photo of a Shiba Inu">
+        <img mat-card-image src="{{drink.strDrinkThumb}}" alt="Photo of a coctail">
         <mat-card-content>
           <p>
             {{drink.strAlcoholic}}
@@ -30,8 +32,7 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
+          <button mat-button (click)="addToCart(drink)">Add to cart</button>
         </mat-card-actions>
       </mat-card>
     </mat-grid-tile>

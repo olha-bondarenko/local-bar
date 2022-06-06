@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Coctail } from 'src/app/models/coctails.model';
 import { LocalBarService } from 'src/app/service/local-bar.service';
 
@@ -12,7 +13,8 @@ drinks: Coctail[] = []
 value = '';
 message = '';
 
-  constructor(private service: LocalBarService) { }
+  constructor(private service: LocalBarService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getDefaultList();
@@ -36,7 +38,12 @@ message = '';
     })
   }
 
-  addCoctail(coctail: Coctail) {
+  addToCart(coctail: Coctail) {
     this.service.addCoctail(coctail)
+    .subscribe(data => {})
+  }
+
+  navigate() {
+    this.router.navigate(['checkout'])
   }
 }
